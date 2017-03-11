@@ -1,0 +1,16 @@
+{
+  "name": "toybox",
+  "version": "1.0.0",
+  "description": "A fun playtime for all the family",
+  "main": "mapReduceFilter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mustache dataView.json myTemplate.mustache > index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.6",
+    "mustache": "^2.3.0"
+  }
+}

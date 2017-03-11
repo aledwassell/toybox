@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Promises</title>
+    <link rel="stylesheet" href="ccs/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tachyons/4.6.2/tachyons.min.css">
+    <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+    <script src="js/handlebars-v4.0.5.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <div id="target">Loading...</div>
+    <script id="myDataTemplate" type="text/x-handlebars-template">
+      {{#each sheep}}
+        <div class="helvetica">
+          <div>
+            <h1 class="f2 lh-headline">{{name}}</h1><span>({{species}})</span>
+          </div>
+          <div>
+            <img src="{{photo}}" alt="{{name}}'s photo">
+          </div>
+          <p>Age: {{age birthYear}}</p>
+          {{#if favFoods}}
+          <h4>Favorite Foods</h4>
+          <ul>
+            {{#each favFoods}}
+            <li>{{{this}}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+      {{/each}}
+        <div class="helvetica">
+          {{#each cows}}
+            <h2>{{name}}</h2>
+            <img src="{{photo}}" alt="">
+          {{/each}}
+        </div>
+        </div>
+
+    </script>
+
+    <script src="js/promise.js" charset="utf-8"></script>
+    <script src="js/mapReduceFilter.js" charset="utf-8"></script>
+    <script src="js/reduce.js" charset="utf-8"></script>
+    <script src="js/passtofn.js" charset="utf-8"></script>
+    <script src="js/handlebars_play.js" charset="utf-8"></script>
+  </body>
+</html>
