@@ -16,13 +16,19 @@
         <div class="helvetica ma3">
           <div>
             <h1 class="f2 lh-headline">{{name}}</h1>
+            {{#if species}}
             <span>({{species}})</span>
+            {{/if}}
           </div>
+          {{#if photo}}
           <div class="mv2">
             <img src="{{photo}}" alt="{{name}}'s photo">
           </div>
+          {{/if}}
           <div>
+            {{#if age}}
             <p>Age: {{age birthYear}}</p>
+            {{/if}}
             {{#if favFoods}}
             <h4>Favorite Foods</h4>
             <ul>

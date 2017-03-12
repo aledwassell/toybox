@@ -19,6 +19,11 @@ Handlebars.registerHelper('age', function(birthYear){
 
 
 function createHTML(data) {
+  let midPoint = Math.floor(data.sheep.length / 2);
+  console.log(midPoint);
+  data.sheep.splice(midPoint, 0, data.heading);
+  console.log(data);
+
   let rawTemplate = document.getElementById('myDataTemplate').innerHTML;
   let compileTemplate = Handlebars.compile(rawTemplate);
   let ourGeneratedHTML = compileTemplate(data);
@@ -27,5 +32,5 @@ function createHTML(data) {
   container.innerHTML = ourGeneratedHTML;
 
 
-  let midPoint = Math.floor(data.sheep.length / 2);
+
 }
