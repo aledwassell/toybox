@@ -14,7 +14,9 @@ Handlebars.registerHelper('age', function(birthYear){
   } else {
     return age + ' years old';
   }
-})
+});
+
+
 
 function createHTML(data) {
   let rawTemplate = document.getElementById('myDataTemplate').innerHTML;
@@ -25,5 +27,5 @@ function createHTML(data) {
   container.innerHTML = ourGeneratedHTML;
 
 
-  console.log(Math.floor(data.sheep.length / 2));
+  let midPoint = Math.floor(data.sheep.length / 2);
 }
