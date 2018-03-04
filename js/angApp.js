@@ -33,8 +33,11 @@
         }])
         .controller('giffController', ['$scope', 'getDataService', function($scope, getDataService){
             $scope.getDataService = getDataService;
-            $scope.giffsData = getDataService.getGiffs('cheese');
-            $scope.giffsImageRes = $scope.giffsData.data;
-            console.log($scope.giffsData)
+            $scope.giffsPromise = getDataService.getGiffs('cows')
+                .$promise.then(function(giff){$scope.giffs = giff})
+                .then(function(){
+                    console.log($scope.giffs.data)
+                })
+
         }])
 })();
