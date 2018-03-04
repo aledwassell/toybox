@@ -1,6 +1,13 @@
 (function () {
     'use strict';
     var toybox_app = angular.module('toybox_app', ['ngResource'])
+        .factory('getData', function ($resource) {
+            return $resource('https://jsonplaceholder.typicode.com/posts/1', {}, {
+                get: {
+                    method: 'GET'
+                }
+            })
+        })
         .factory('getGiffs', function($resource){
             return $resource('https://api.giphy.com/v1/gifs/search?api_key=RY20njLFYdgoLq572vuNe1QJEzs7qoVS &q= &limit=25&offset=0&rating=G&lang=en', {}, {
                 get: {
@@ -10,14 +17,24 @@
                 }
             })
         })
-        .service('getDataService', ['$http', 'getGiffs', function ($http, getGiffs) {
-            var getGiffs = getGiffs;
+        .service('getDataService', ['$http', 'getData', 'getGiffs', function ($http, getData, getGiffs) {
+            var gotData = getData,
+                getGiffs = getGiffs;
+            this.gotData = function(){
+                return gotData.get();
+            }
             this.getGiffs = function(){
                 return getGiffs.get({query: cheese});
             }
         }])
+        .controller('testController', ['$scope', 'getDataService', function ($scope, getDataService) {
+            var getDataService = getDataService.gotData();
+            $scope.test = getDataService;
+            console.log($scope.test)
+        }])
         .controller('giffController', ['$scope', 'getDataService', function($scope, getDataService){
             $scope.getDataService = getDataService;
             $scope.giffs = getDataService.getGiffs({query: 'cheese'})
+            console.log($scope.giffs)
         }])
 })();
