@@ -19,7 +19,12 @@
       </div>
 
       <div ng-controller="giffController">
-
+        <ul>
+          <li ng-repeat="image in giffsImageRes">
+            <img src="image.url" alt="image.slug">
+            <span>{{image.url}}</span>
+          </li>
+        </ul>
       </div>
 
 

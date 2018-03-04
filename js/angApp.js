@@ -23,18 +23,18 @@
             this.gotData = function(){
                 return gotData.get();
             }
-            this.getGiffs = function(){
-                return getGiffs.get({query: cheese});
+            this.getGiffs = function(query){
+                return getGiffs.get({query: query});
             }
         }])
         .controller('testController', ['$scope', 'getDataService', function ($scope, getDataService) {
             var getDataService = getDataService.gotData();
             $scope.test = getDataService;
-            console.log($scope.test)
         }])
         .controller('giffController', ['$scope', 'getDataService', function($scope, getDataService){
             $scope.getDataService = getDataService;
-            $scope.giffs = getDataService.getGiffs({query: 'cheese'})
-            console.log($scope.giffs)
+            $scope.giffsData = getDataService.getGiffs('cheese');
+            $scope.giffsImageRes = $scope.giffsData.data;
+            console.log($scope.giffsData)
         }])
 })();
