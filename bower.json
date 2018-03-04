@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "tachyons": "^4.9.1",
-    "angular": "^1.6.9"
+    "angular": "^1.6.9",
+    "angular-resource": "^1.6.9"
   }
 }
