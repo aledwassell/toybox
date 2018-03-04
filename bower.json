@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "tachyons": "^4.9.1"
+    "tachyons": "^4.9.1",
+    "angular": "^1.6.9"
   }
 }
