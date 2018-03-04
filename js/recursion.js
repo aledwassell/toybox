@@ -1,10 +1,10 @@
 let countDown = (num) => {
     if(num === 0) return;
     countDown(num - 1)
-    console.log(num);
+    console.log('count down is at: ',num);
 }
 
-countDown(200);
+countDown(5);
 
 let categories = [
     {id: 'animals', 'parent': null},
