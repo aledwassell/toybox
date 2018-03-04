@@ -11,39 +11,8 @@
   </head>
   <body>
     <div id="target">Loading...</div>
-    <script id="myDataTemplate" type="text/x-handlebars-template">
-      {{#each sheep}}
-        <div class="helvetica ma3">
-          <div>
-            <h1 class="f2 lh-headline">{{name}}</h1>
-            {{#if species}}
-            <span>({{species}})</span>
-            {{/if}}
-          </div>
-          {{#if photo}}
-          <div class="mv2">
-            <img src="{{photo}}" alt="{{name}}'s photo">
-          </div>
-          {{/if}}
-          <div>
-            {{#if age}}
-            <p>Age: {{age birthYear}}</p>
-            {{/if}}
-            {{#if favFoods}}
-            <h4>Favorite Foods</h4>
-            <ul>
-              {{#each favFoods}}
-              <li>{{{this}}}</li>
-              {{/each}}
-            </ul>
-            {{/if}}
-          </div>
-          <hr>
-        </div>
 
-      {{/each}}
-
-    </script>
+    <h1>Hello</h1>
 
     <script src="js/promise.js" charset="utf-8"></script>
     <script src="js/mapReduceFilter.js" charset="utf-8"></script>
