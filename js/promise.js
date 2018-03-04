@@ -1,4 +1,5 @@
-(function() {
+
+  (function() {
 
 
   const api = 'http://api.giphy.com/v1/gifs/search?q=cats&api_key=dc6zaTOxFJmzC';
