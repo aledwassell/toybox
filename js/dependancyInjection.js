@@ -1,12 +1,14 @@
-var toBeInjected = function (say) {
-    setTimeout(function (say) {
-        console.info(say);
+// var toBeInjected = function (say) {
+//     setTimeout(function () {
+//         console.info(say);
+//     }, 1000);
+// }
+
+function mainFunc(aGlobalFunc, whatToSay) {
+    var whatSay = whatToSay;
+    aGlobalFunc(function () {
+        console.info(whatSay);
     }, 1000);
 }
 
-function mainFunc(toBeInjected, whatToSay) {
-    var whatSay = whatToSay;
-    toBeInjected(whatSay);
-}
-
-mainFunc('hello world')
+mainFunc(setInterval, 'hello world')
