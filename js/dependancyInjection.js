@@ -4,11 +4,11 @@
 //     }, 1000);
 // }
 
-function mainFunc(aGlobalFunc, whatToSay) {
+var mainFunc = function (aGlobalFunc, whatToSay) {
     var whatSay = whatToSay;
     aGlobalFunc(function () {
         console.info(whatSay);
     }, 1000);
-}
+}.deb();
 
-mainFunc(setInterval, 'hello world')
+mainFunc(setInterval, 'hello world');
