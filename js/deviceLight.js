@@ -1,9 +1,11 @@
 (function () {
     'use strict'
-
-    console.log('device light')
+    var element = document.getElementById('light')
     document.addEventListener('devicelight', function (e) {
         console.log(e.value);
+        // element.appendChild(`<p>${e.value}</p>`);
+        document.body.style.backgroundColor = "red";
     })
+    document.body.style.backgroundColor = "blue";
 
 })();
