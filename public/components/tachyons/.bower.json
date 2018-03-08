@@ -1,0 +1,35 @@
+{
+  "name": "tachyons",
+  "description": "Functional CSS for humans",
+  "main": "css/tachyons.css",
+  "authors": [
+    "mrmrs"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "design",
+    "system",
+    "responsive",
+    "design"
+  ],
+  "homepage": "http://tachyons.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "4.9.1",
+  "_release": "4.9.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.9.1",
+    "commit": "5fe14c83b57ee1752d10f964622c766e29af41bc"
+  },
+  "_source": "https://github.com/tachyons-css/tachyons.git",
+  "_target": "^4.9.1",
+  "_originalSource": "tachyons",
+  "_direct": true
+}

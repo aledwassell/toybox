@@ -18,6 +18,7 @@
     "tachyons": "^4.9.1",
     "angular": "^1.6.9",
     "angular-resource": "^1.6.9",
-    "deb.js": "^0.0.2"
+    "deb.js": "^0.0.2",
+    "Font-Awesome": "^5.0.8"
   }
 }
