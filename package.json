@@ -5,7 +5,8 @@
   "main": "mapReduceFilter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mustache dataView.json myTemplate.mustache > index.html"
+    "build": "mustache dataView.json myTemplate.mustache > index.html",
+    "startServ": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
