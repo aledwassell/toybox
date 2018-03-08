@@ -19,6 +19,6 @@
     "angular": "^1.6.9",
     "angular-resource": "^1.6.9",
     "deb.js": "^0.0.2",
-    "Font-Awesome": "^5.0.8"
+    "Font-Awesome": "fontawesome#^5.0.8"
   }
 }
