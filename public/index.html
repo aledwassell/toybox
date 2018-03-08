@@ -3,49 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Promises</title>
-    <!-- <link rel="stylesheet" href="ccs/style.css"> -->
-    <!--<script type="text/javascript" src="js/components/angular/angular.js"></script>-->
-    <!--<script type="text/javascript" src="js/components/angular-resource/angular-resource.js"></script>-->
+     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
-    <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome.min.css">
+    <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome-all.css">
+    <script type="text/javascript" src="js/angApp.js"></script>
 
     <!-- <script src="js/handlebars-v4.0.5.js" charset="utf-8"></script> -->
 
   </head>
-  <body>
-  <i class="fa fa-5x fa-camera-retro"></i>
-    <div ng-app="toybox_app">
-
-      <div ng-controller="testController">
-        {{test}}
-      </div>
-
-      <div ng-controller="giffController">
-        <ul>
-          <li ng-repeat="image in giffs">
-            {{image}}
-          </li>
-        </ul>
-      </div>
-
-
-
-    </div>
-    <div id="target">Loading...</div>
-    <div id="jqueryWonder"></div>
-    <!-- <script src="js/promise.js" charset="utf-8"></script> -->
-    <!-- <script src="js/mapReduceFilter.js" charset="utf-8"></script> -->
-    <!-- <script src="js/reduce.js" charset="utf-8"></script> -->
-    <!-- <script src="js/passtofn.js" charset="utf-8"></script> -->
-    <!-- <script src="js/handlebars_play.js" charset="utf-8"></script> -->
-    <!-- <script src="js/using_.js" charset="utf-8"></script> -->
-    <!-- webpack -->
-    <!--<script src="js/bundle.js" charset="utf-8"></script>-->
-    <script src="js/binaryTree.js" charset="utf-8"></script>
-    <script src="js/recursion.js" charset="utf-8"></script>
-    <!--<script type="text/javascript" src="js/angApp.js"></script>-->
-    <!--<script type="text/javascript" src="js/dependancyInjection.js"></script>-->
-    <!-- <script src="js/jq_play.js" charset="utf-8"></script> -->
-    <script type="text/javascript" src="js/deviceLight.js"></script>
+  <body ng-app="toybox_app">
+    <div ng-controller="test">{{test}}</div>
+    <i class="fas fa-6x fa-camera-retro"></i>
+    <i class="fas fa-5x fa-camera"></i>
   </body>
 </html>

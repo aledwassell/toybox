@@ -40,4 +40,8 @@
                 })
 
         }])
+        .controller('test', ['$scope', function ($scope) {
+            console.log($scope);
+            $scope.test = 'test';
+        }])
 })();

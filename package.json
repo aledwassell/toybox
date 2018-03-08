@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mustache dataView.json myTemplate.mustache > index.html",
-    "start": "nodemon server.js"
+    "start": "nodemon --watch public server.js -e html,css"
   },
   "author": "",
   "license": "ISC",
