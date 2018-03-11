@@ -24,9 +24,14 @@ server.on('request', (req, res) => {
     });
 
     res.statusCode = 200;
+
     // res.setHeader('Content-Type', 'application/json');
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end('<html><body><h1>Hello, World!</h1></body></html>');
+
+    const responseBody = {headers, method, url, body};
+    // res.write(JSON.stringify(responseBody));
+    // res.end();
+    res.end(JSON.stringify(responseBody))
 })
 
 server.listen(port, () => {
