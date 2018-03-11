@@ -12,6 +12,9 @@ server.on('request', (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     res.end('Hello World');
     console.log(req.url);
+    console.log(req.method);
+    console.log(req.headers);
+    res.end('close');
 })
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
