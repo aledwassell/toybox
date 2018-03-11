@@ -12,6 +12,7 @@ http.createServer(function (req, res) {
         filePath = './public/index.html';
     }
 
+
     let extname = String(path.extname(filePath)).toLowerCase();
     let contentType = 'text/html';
     let mimeTypes = {
