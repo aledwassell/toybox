@@ -7,27 +7,36 @@ let port = process.env.PORT = 3000;
 const server = http.createServer();
 
 server.on('request', (req, res) => {
-    req.on('error', (e) => {
-        console.log(e);
-        res.statusCode = 400;
-        res.end();
-    });
-    res.on('error', (e) => {
-        console.log(e)
-    })
-    if(req.method === 'POST' && req.url === '/echo'){
-        let body = [];
-        req.on('data', (chunk) => {
-            body.push(chunk);
-        }).on('end', () => {
-            body = Buffer.concat(body).toString();
-            res.end(body);
-        });
+    if(req.method === 'GET' && req.url === '/echo'){
+        req.pipe(res);
     } else {
         res.statusCode = 404;
         res.end();
     }
-})
+});
+
+// server.on('request', (req, res) => {
+//     req.on('error', (e) => {
+//         console.log(e);
+//         res.statusCode = 400;
+//         res.end();
+//     });
+//     res.on('error', (e) => {
+//         console.log(e)
+//     })
+//     if(req.method === 'POST' && req.url === '/echo'){
+//         let body = [];
+//         req.on('data', (chunk) => {
+//             body.push(chunk);
+//         }).on('end', () => {
+//             body = Buffer.concat(body).toString();
+//             res.end(body);
+//         });
+//     } else {
+//         res.statusCode = 404;
+//         res.end();
+//     }
+// })
 
 // server.on('request', (req, res) => {
 //     const {headers, method, url} = req;
