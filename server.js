@@ -2,6 +2,7 @@ let http = require('http');
 let fs = require('fs');
 let path = require('path');
 let port = process.env.PORT = 3000;
+let body = [];
 
 const hostname = '127.0.0.1';
 
@@ -14,7 +15,11 @@ server.on('request', (req, res) => {
     console.log(req.url);
     console.log(req.method);
     console.log(req.headers);
-    res.end('close');
+    req.on('data', (chunk) => {
+        body.push(chunk)
+    }).on('end', () => {
+        console.log(body)
+    })
 })
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
