@@ -2,25 +2,33 @@ let http = require('http');
 let fs = require('fs');
 let path = require('path');
 let port = process.env.PORT = 3000;
-let body = [];
+
 
 const hostname = '127.0.0.1';
 
 const server = http.createServer();
 
 server.on('request', (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+    const {headers, method, url} = req;
+    let body = [];
     console.log(req.url);
     console.log(req.method);
     console.log(req.headers);
     req.on('data', (chunk) => {
         body.push(chunk)
     }).on('end', () => {
-        console.log(body)
-    })
+        console.log('body', body)
+        body = Buffer.concat(body).toString();
+    }).on('error', (e) => {
+        console.log(`There was an error ${e}`);
+    });
+
+    res.statusCode = 200;
+    // res.setHeader('Content-Type', 'application/json');
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end('<html><body><h1>Hello, World!</h1></body></html>');
 })
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+
+server.listen(port, () => {
+    console.log(`Server running at: ${port}/`);
 })
