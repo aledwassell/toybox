@@ -36,19 +36,8 @@
 // });
 
 let fs = require('fs');
-const myFunc = require('learnExternal1');
-fs.readdir(process.argv[2], (e, l) => {
-    if(e){
-        console.log('error: ', e);
-        return;
-    } else {
-        return l.filter((f) => {
-            if(f.match('.' + process.argv[3])){
-                console.log(f.match(process.argv[3]).input);
-            } else{
-                return;
-            }
-        })
-    }
+const myFunc = require('./learnExternal1');
 
-})
+myFunc(process.argv[2], process.argv[3], (e) => {
+    console.log(e)
+});

@@ -1,13 +1,12 @@
-module.exports = function () {
+module.exports = function (directory, ext, callback) {
     let fs = require('fs');
-    fs.readdir(process.argv[2], (e, l) => {
+    fs.readdir(directory, (e, l) => {
         if(e){
-            console.log('error: ', e);
-            return;
+            return callback(e);
         } else {
             return l.filter((f) => {
-                if(f.match('.' + process.argv[3])){
-                    console.log(f.match(process.argv[3]).input);
+                if(f.match('.' + ext)){
+                    console.log(f.match(ext).input);
                 } else{
                     return;
                 }
