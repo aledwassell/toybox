@@ -36,6 +36,7 @@
 // });
 
 let fs = require('fs');
+const myFunc = require('learnExternal1');
 fs.readdir(process.argv[2], (e, l) => {
     if(e){
         console.log('error: ', e);
@@ -49,5 +50,5 @@ fs.readdir(process.argv[2], (e, l) => {
             }
         })
     }
-    
+
 })
