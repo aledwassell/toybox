@@ -6,7 +6,7 @@ module.exports = function (directory, ext, callback) {
         } else {
             return l.filter((f) => {
                 if(f.match('.' + ext)){
-                    console.log(f.match(ext).input);
+                    callback(null, f.match(ext).input);
                 } else{
                     return;
                 }

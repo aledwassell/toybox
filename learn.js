@@ -39,6 +39,10 @@
 let fs = require('fs');
 const myFunc = require('./learnExternal1');
 
-myFunc(process.argv[2], process.argv[3], (e) => {
-    console.log(e)
+myFunc(process.argv[2], process.argv[3], (error, data) => {
+    if(error){
+        console.log('there was an error', e);
+    } else {
+        console.log(data)
+    }
 });
