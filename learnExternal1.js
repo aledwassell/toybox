@@ -7,17 +7,11 @@ module.exports = function (directory, ext, callback) {
             return callback(err, null);
         } else {
             data.forEach((f) => {
-                // ext has .
-                if(path.extname(f) === ext){
+                if(path.extname(f) === `.${ext}`){
                     files.push(f);
+                } else {
+                    return;
                 }
-
-                // console.log(f);
-                // if(){
-                //     files.push(f);
-                // } else {
-                //     return;
-                // }
             });
             callback(null, files);
         }

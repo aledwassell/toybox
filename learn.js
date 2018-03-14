@@ -38,10 +38,12 @@
 const myModule = require('./learnExternal1');
 const path = require('path');
 myModule(process.argv[2], process.argv[3], (err, data) => {
-    console.log(path.extname('index.html'), process.argv[3]);
     if(err){
         console.log('there was an error', err);
     } else {
-        console.log(data)
+        data.forEach((i) => {
+            console.log(i)
+        })
+
     }
 });
