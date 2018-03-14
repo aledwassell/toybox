@@ -35,13 +35,12 @@
 //     }
 // });
 
-
-let fs = require('fs');
-const myFunc = require('./learnExternal1');
-
-myFunc(process.argv[2], process.argv[3], (error, data) => {
-    if(error){
-        console.log('there was an error', e);
+const myModule = require('./learnExternal1');
+const path = require('path');
+myModule(process.argv[2], process.argv[3], (err, data) => {
+    console.log(path.extname('index.html'), process.argv[3]);
+    if(err){
+        console.log('there was an error', err);
     } else {
         console.log(data)
     }

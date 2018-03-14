@@ -1,17 +1,26 @@
 module.exports = function (directory, ext, callback) {
-    let fs = require('fs');
-    fs.readdir(directory, (e, l) => {
-        if(e){
-            return callback(e);
+    const fs = require('fs');
+    const path = require('path');
+    let files = [];
+    fs.readdir(directory, (err, data) => {
+        if(err){
+            return callback(err, null);
         } else {
-            return l.filter((f) => {
-                if(f.match('.' + ext)){
-                    callback(null, f.match(ext).input);
-                } else{
-                    return;
+            data.forEach((f) => {
+                // ext has .
+                if(path.extname(f) === ext){
+                    files.push(f);
                 }
-            })
-        }
 
-    })
+                // console.log(f);
+                // if(){
+                //     files.push(f);
+                // } else {
+                //     return;
+                // }
+            });
+            callback(null, files);
+        }
+    });
+
 }
