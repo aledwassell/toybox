@@ -48,6 +48,27 @@
 //     }
 // });
 
+// const http = require('http');
+// http.get(process.argv[2], (res) => {
+//     const {statusCode} = res;
+//     const contentType = res.headers['content-type'];
+//
+//     if(statusCode !== 200){
+//         console.error('There was an error, 200');
+//         return false;
+//     }
+//
+//     res.setEncoding('utf8');
+//
+//     res.on('data', (data) => {
+//         console.log(data)
+//     }).on('end', () => {
+//
+//     })
+// }).on('error', (e) => {
+//     console.log(`There was an error: ${e.message}`);
+// });
+
 const http = require('http');
 http.get(process.argv[2], (res) => {
     const {statusCode} = res;
@@ -59,11 +80,16 @@ http.get(process.argv[2], (res) => {
     }
 
     res.setEncoding('utf8');
-
+    let dataArr = [];
+    let returnString = '';
     res.on('data', (data) => {
-        console.log(data)
+        dataArr.push(data);
     }).on('end', () => {
-
+        console.log(dataArr.length)
+        returnString = dataArr.reduce((acc, curr) => {
+            return `${acc}${curr}`
+        })
+        console.log(returnString);
     })
 }).on('error', (e) => {
     console.log(`There was an error: ${e.message}`);
