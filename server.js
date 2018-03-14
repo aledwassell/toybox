@@ -9,6 +9,13 @@ const mongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const routes = require('./index')(app, {});
+
+
+
+app.get('/', (req, res) => {
+    res.send('Heeeeeeey');
+})
 
 
 
