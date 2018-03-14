@@ -9,15 +9,10 @@ const mongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+
 const routes = require('./index')(app, {});
-
-
-
-app.get('/', (req, res) => {
-    res.send('Heeeeeeey');
-})
-
-
 
 app.listen(port, () => {
     console.log(`Server running at: ${port}/`);
