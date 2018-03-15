@@ -44,11 +44,27 @@
             console.log($scope);
             $scope.test = 'test';
         }])
-        .controller("chartsCtrl", function ($scope) {
+        .controller("chartsCtrl", ['$scope', function ($scope) {
             $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
             $scope.data = [300, 500, 100];
             $scope.options = {
+                cutoutPercentage: 50,
+                rotation: -1 * Math.PI,
+                dataSetOverride: {
+                    backgroundColor: [
+                            '#67ff79',
+                            '#e20b16'
+                        ]
+                },
+                circumference: Math.PI
+            };
 
+            $scope.slider = {
+                value: 150,
+                options: {
+                    floor: 0,
+                    ceil: 450,
+                },
             }
-        });
+        }]);
 })();
