@@ -22,8 +22,9 @@
   <body ng-app="toybox_app">
 
     <div ng-controller="chartsCtrl">
-      <canvas id="doughnut" class="chart chart-doughnut"
-              chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors">
+
+      <canvas id="pie" class="chart chart-pie"
+              chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options">
       </canvas>
       <div>
         <rzslider

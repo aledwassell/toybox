@@ -44,69 +44,58 @@
             console.log($scope);
             $scope.test = 'test';
         }])
+
+
+
+
+
+
+
         .controller("chartsCtrl", ['$scope', function ($scope) {
-
-            let ctx = document.getElementById('doughnut').getContext('2d');
-            let gradientColors = [
-                {
-                    start: '#f3bb98',
-                    end: '#ea8ba9'
-                },
-                {
-                    start: '#F6A064',
-                    end: '#ED5384'
-                }
-            ];
-
-            let gradients = [];
-
-            gradientColors.forEach( function( item ){
-                var gradient = ctx.createLinearGradient(50, 50, 150 , 150);
-                gradient.addColorStop(0, item.start);
-                gradient.addColorStop(1, item.end);
-                gradients.push(gradient);
-            });
-
-
-            const alterValues = (a, b, c, d) => {
-                const total = $scope.data.reduce((acc, curr) => acc + curr);
-
-                if(d === 0){
-                    return;
-                } else if(d > 0){
-                    b = b - d;
-                }
-                $scope.data[1] = b
-                console.log(d, 'd');
-                console.log(b, 'b');
-
-            }
             $scope.$watch('slider.value', function () {
                 console.log($scope.slider.value);
-                $scope.data[1] = $scope.slider.value;
+                $scope.data[2] = $scope.slider.value;
             });
-            console.log(gradients, ctx)
+            $scope.fill = '';
+            $scope.$on('chart-create', (e, chart) => {
+                console.log(e, chart)
+                var ctx = chart.chart.chart.ctx;
+                var fillPattern = ctx.createLinearGradient(0,0,200,0);
+                fillPattern.addColorStop(0, 'rgba(0,255,0, 1)');
+                fillPattern.addColorStop(1, 'rgba(255,0,0, 1)');
+                ctx.fillStyle = fillPattern;
 
-            $scope.labels = ["Download Sales", "In-Store Sales"];
-            $scope.data = [
+                $scope.fill = fillPattern;
+
+                console.log(fillPattern)
+            });
+
+
+            $scope.labels = ["Download Sales", "In-Store Sales", "gradient"];
+            $scope.data = [20, 40, 70, 10];
+            $scope.colors = [
                 {
-                    value: 75,
-                    color: gradients[0]
+                    backgroundColor: $scope.fill,
+                    pointBackgroundColor: $scope.fill
                 },
                 {
-                    value:25,
-                    color: gradients[1]
-                }
+                    backgroundColor: 'rgba(255,255,0, 1)',
+                    pointBackgroundColor: 'rgba(255,255,0, 1)'
+                },
+                {
+                    backgroundColor: 'rgba(255,0,255, 1)',
+                    pointBackgroundColor: 'rgba(255,0,255, 1)'
+                },
             ];
-            $scope.colors = gradientColors;
 
             $scope.options = {
                 cutoutPercentage: 50,
                 rotation: -1 * Math.PI,
                 circumference: Math.PI
             };
+
             $scope.slider = {
-                value: 0,
+                value: 20,
                 options: {
                     disabled: false,
                     floor: 0,
@@ -116,5 +105,6 @@
                     }
                 }
             };
+
         }]);
 })();
