@@ -45,38 +45,76 @@
             $scope.test = 'test';
         }])
         .controller("chartsCtrl", ['$scope', function ($scope) {
-            $scope.max = 100;
-            $scope.slider = {
-                value: 200,
-                options: {
-                    disabled: false,
-                    floor: $scope.data[0],
-                    ceil: $scope.data[2]
-                    // translate: (v) => {
-                    //     return `${Math.floor((v / $scope.data[2]) * 100)}%`;
-                    // }
-                }
-            };
 
+            let ctx = document.getElementById('doughnut').getContext('2d');
+            let gradientColors = [
+                {
+                    start: '#f3bb98',
+                    end: '#ea8ba9'
+                },
+                {
+                    start: '#F6A064',
+                    end: '#ED5384'
+                }
+            ];
+
+            let gradients = [];
+
+            gradientColors.forEach( function( item ){
+                var gradient = ctx.createLinearGradient(50, 50, 150 , 150);
+                gradient.addColorStop(0, item.start);
+                gradient.addColorStop(1, item.end);
+                gradients.push(gradient);
+            });
+
+
+            const alterValues = (a, b, c, d) => {
+                const total = $scope.data.reduce((acc, curr) => acc + curr);
+
+                if(d === 0){
+                    return;
+                } else if(d > 0){
+                    b = b - d;
+                }
+                $scope.data[1] = b
+                console.log(d, 'd');
+                console.log(b, 'b');
+
+            }
             $scope.$watch('slider.value', function () {
-                console.log($scope.slider.value)
-                $scope.data[2] = $scope.slider.value;
-            })
-            $scope.labels = ["Download Sales", "In-Store Sales", "Chuffing Cheap Sales"];
-            $scope.data = [100, 300, 500];
-            $scope.colors = [
-                    '#67ff79',
-                    '#e20b16',
-                    '#67ff79'
-                ];
+                console.log($scope.slider.value);
+                $scope.data[1] = $scope.slider.value;
+            });
+            console.log(gradients, ctx)
+
+            $scope.labels = ["Download Sales", "In-Store Sales"];
+            $scope.data = [
+                {
+                    value: 75,
+                    color: gradients[0]
+                },
+                {
+                    value:25,
+                    color: gradients[1]
+                }
+            ];
+            $scope.colors = gradientColors;
+
             $scope.options = {
                 cutoutPercentage: 50,
                 rotation: -1 * Math.PI,
                 circumference: Math.PI
             };
-
-
-
-
+            $scope.slider = {
+                value: 0,
+                options: {
+                    disabled: false,
+                    floor: 0,
+                    ceil: 100,
+                    translate: (v) => {
+                        return `${Math.floor((v / 100) * 100)}%`;
+                    }
+                }
+            };
         }]);
 })();
