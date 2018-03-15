@@ -45,15 +45,25 @@
             $scope.test = 'test';
         }])
         .controller("chartsCtrl", ['$scope', function ($scope) {
-            $scope.val = [100, 400, 600];
-            let doChart = document.getElementById('doughnut');
+            $scope.max = 100;
+            $scope.slider = {
+                value: 200,
+                options: {
+                    disabled: false,
+                    floor: $scope.data[0],
+                    ceil: $scope.data[2]
+                    // translate: (v) => {
+                    //     return `${Math.floor((v / $scope.data[2]) * 100)}%`;
+                    // }
+                }
+            };
+
             $scope.$watch('slider.value', function () {
                 console.log($scope.slider.value)
-                console.log($scope.val)
-                // doChart.update();
+                $scope.data[2] = $scope.slider.value;
             })
-            $scope.labels = ["Download Sales", "In-Store Sales"];
-            $scope.data = $scope.val;
+            $scope.labels = ["Download Sales", "In-Store Sales", "Chuffing Cheap Sales"];
+            $scope.data = [100, 300, 500];
             $scope.colors = [
                     '#67ff79',
                     '#e20b16',
@@ -64,20 +74,7 @@
                 rotation: -1 * Math.PI,
                 circumference: Math.PI
             };
-            $scope.max = 100;
-            $scope.slider = {
-                value: function () {
-                    $scope.val[1] = this.value;
-                },
-                options: {
-                    disabled: false,
-                    floor: $scope.data[0],
-                    ceil: $scope.data[2]
-                    // translate: (v) => {
-                    //     return `${Math.floor((v / $scope.data[2]) * 100)}%`;
-                    // }
-                }
-            };
+
 
 
 
