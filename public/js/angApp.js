@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var toybox_app = angular.module('toybox_app', ['ngResource'])
+    var toybox_app = angular.module('toybox_app', ['ngResource', 'rzModule', 'chart.js'])
         .factory('getData', function ($resource) {
             return $resource('https://jsonplaceholder.typicode.com/posts/1', {}, {
                 get: {
@@ -44,4 +44,11 @@
             console.log($scope);
             $scope.test = 'test';
         }])
+        .controller("chartsCtrl", function ($scope) {
+            $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+            $scope.data = [300, 500, 100];
+            $scope.options = {
+
+            }
+        });
 })();

@@ -9,11 +9,29 @@
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
     <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome-all.css">
     <script type="text/javascript" src="js/angApp.js"></script>
+    <script type="text/javascript" src="components/angularjs-slider/dist/rzslider.js"></script>
+    <script type="text/javascript" src="components/angular-chart/angular-chart.js"></script>
+    <script src="components/angular-chart.js/dist/angular-chart.min.js"></script>
 
     <!-- <script src="js/handlebars-v4.0.5.js" charset="utf-8"></script> -->
 
   </head>
   <body ng-app="toybox_app">
+
+    <div ng-controller="chartsCtrl">
+      <canvas id="doughnut" class="chart chart-doughnut"
+              chart-data="data" chart-labels="labels" chart-options="options">
+      </canvas>
+      <div>
+        <rzslider
+                rz-slider-model="slider.value"
+                rz-slider-options="slider.options"></rzslider>
+      </div>
+    </div>
+
+
+
+
     <div ng-controller="testController">{{test}}</div>
     <i class="fas fa-6x fa-camera-retro"></i>
     <i class="fas fa-5x fa-camera"></i>
