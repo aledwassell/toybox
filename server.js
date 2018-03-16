@@ -6,8 +6,8 @@ const db = require('./config/db');
 
 const app = express();
 
-
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 
 MongoClient.connect(db.url, (e, database) => {
     if(e) return console.log('there was an error: ', e)

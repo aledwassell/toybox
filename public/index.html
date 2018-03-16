@@ -38,5 +38,10 @@
             </div>
         </div>
     </div>
+  <div ng-controller="dataController">
+      <input type="text" placeholder="title" ng-model="sendModel.title">
+      <input type="text" placeholder="body" ng-model="sendModel.text">
+      <button ng-click="send()">Send POST</button>
+  </div>
   </body>
 </html>
