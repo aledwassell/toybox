@@ -52,47 +52,62 @@
 
 
         .controller("chartsCtrl", ['$scope', function ($scope) {
-            $scope.data = [20, 80, 0, 0];
-
-            function changeDat (a, b, c, d, newVal, oldVal) {
-                if(newVal > oldVal){
-                    b = b - d;
+            let maxCalls = 150;
+            let currentCalls = 140;
+            let alarmValue = 50;
+            $scope.slider1 = {
+                value: 0,
+                options: {
+                    disabled: false,
+                    floor: 0,
+                    ceil: maxCalls,
+                    translate: (v) => {
+                        return `${v}%`;
+                    }
                 }
-                $scope.data = [20, d, 0, d];
-            }
-            $scope.$watch('slider.value', function (newVal, oldVal) {
-                console.log($scope.data);
-                console.log($scope.slider.value);
-                console.log(newVal, oldVal)
-                // $scope.data[3] = $scope.slider.value;
-                changeDat(null, 80, null, $scope.slider.value, newVal, oldVal)
-            });
+            };
 
-            // let canvas = document.createElement('canvas');
-            // canvas.width = 300;
-            // canvas.height = 300;
-            // let ctx01 = canvas.getContext("2d");
-            // let gradient = ctx01.createLinearGradient(0, 0, 0, 300);
-            // gradient.addColorStop(0, 'green');
-            // gradient.addColorStop(1, 'red');
-            //
-            // let fill = '';
-            // $scope.$on('chart-create', (e, chart) => {
-            //     console.log('chart', chart);
-            //     var ctx = chart.chart.ctx;
-            //     var fillPattern = ctx.createLinearGradient(0,0,200,0);
-            //     fillPattern.addColorStop(0, 'rgba(0,255,0, 1)');
-            //     fillPattern.addColorStop(1, 'rgba(255,0,0, 1)');
-            //     ctx.fillStyle = fillPattern;
-            //     console.log('chart', chart);
-            //     console.log('ctx', ctx)
-            //     fill = fillPattern;
-            //     // $scope.data.datasets.backgroundColor = fillPattern;
-            //     console.log(fillPattern)
+            $scope.slider2 = {
+                value: 0,
+                options: {
+                    disabled: false,
+                    floor: 0,
+                    ceil: maxCalls,
+                    translate: (v) => {
+                        return `${v}%`;
+                    }
+                }
+            };
+
+            $scope.data = [];
+
+
+            function setGauge() {
+                if(currentCalls < alarmValue){
+                    $scope.data[0] = currentCalls;
+                    $scope.data[1] = alarmValue - currentCalls;
+                    $scope.data[2] = 0;
+                    $scope.data[3] = maxCalls - alarmValue
+                } else if(currentCalls > alarmValue){
+                    $scope.data[0] = alarmValue;
+                    $scope.data[1] = 0;
+                    $scope.data[2] = currentCalls - alarmValue;
+                    $scope.data[3] = maxCalls - currentCalls
+                }
+            }
+
+            setInterval(() => {
+                alarmValue = $scope.slider1.value;
+                currentCalls = $scope.slider2.value
+                setGauge()
+            }, 300)
+
+            // $scope.$watchCollection('slider1.value', function (newVal, oldVal) {
+            //     alarmValue = $scope.slider1.value
+            //     setGauge()
             // });
 
-
-            $scope.labels = ["Download Sales", "In-Store Sales", "more data", "and some more data"];
+            $scope.labels = ["Download Sales", "In-Store Sales", "and some more data"];
             $scope.colors = [
                 {
                     fillColor: '#00ffff',
@@ -113,13 +128,13 @@
                     pointBackgroundColor: '#00ff00'
                 },
                 {
-                    fillColor: '#ffff00',
-                    strokeColor: '#ffff00',
-                    pointColor: '#ffff00',
-                    pointStrokeColor: '#ffff00',
-                    pointHighlightFill: '#ffff00',
-                    pointHighlightStroke: '#ffff00',
-                    pointBackgroundColor: '#ffff00'
+                    fillColor: '#ffee00',
+                    strokeColor: '#ffee00',
+                    pointColor: '#ffee00',
+                    pointStrokeColor: '#ffee00',
+                    pointHighlightFill: '#ffee00',
+                    pointHighlightStroke: '#ffee00',
+                    pointBackgroundColor: '#ffee00',
                 },
                 {
                     fillColor: '#ff0000',
@@ -138,18 +153,6 @@
                 rotation: -1 * Math.PI,
                 circumference: Math.PI,
                 animation: false
-            };
-
-            $scope.slider = {
-                value: 0,
-                options: {
-                    disabled: false,
-                    floor: 0,
-                    ceil: 100,
-                    translate: (v) => {
-                        return `${Math.floor((v / 100) * 100)}%`;
-                    }
-                }
             };
 
         }]);
