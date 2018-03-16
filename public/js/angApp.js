@@ -52,27 +52,20 @@
 
 
         .controller("chartsCtrl", ['$scope', function ($scope) {
-            let randN = getRandomInt(20, 100);
-            $scope.data = [randN, 40, 0, 0];
-            function getRandomInt(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            $scope.data = [20, 80, 0, 0];
+
+            function changeDat (a, b, c, d, newVal, oldVal) {
+                if(newVal > oldVal){
+                    b = b - d;
+                }
+                $scope.data = [20, d, 0, d];
             }
-
-            setInterval(function () {
-                randN = getRandomInt(20, 100);
-            }, 500);
-
-            $scope.data = [randN, 40, 0, 0];
-
-            function changeDat (sliderVal) {
-                $scope.data[3] = sliderVal;
-            }
-            $scope.$watch('slider.value', function () {
+            $scope.$watch('slider.value', function (newVal, oldVal) {
+                console.log($scope.data);
                 console.log($scope.slider.value);
+                console.log(newVal, oldVal)
                 // $scope.data[3] = $scope.slider.value;
-                changeDat($scope.slider.value)
+                changeDat(null, 80, null, $scope.slider.value, newVal, oldVal)
             });
 
             // let canvas = document.createElement('canvas');
@@ -100,8 +93,6 @@
 
 
             $scope.labels = ["Download Sales", "In-Store Sales", "more data", "and some more data"];
-            // $scope.data = [20, 40, 0, 0];
-
             $scope.colors = [
                 {
                     fillColor: '#00ffff',
