@@ -13,6 +13,19 @@ module.exports = (app, db) => {
         })
     })
 
+    app.put('/notes/:id', (req, res) => {
+        const id = req.params.id
+        const details = {'_id' : new ObjectID(id)};
+        const note = {title: req.body.title, text: req.body.body};
+        db.collection('notes').update(details, note, (e, item) => {
+            if(e){
+                res.send({'error':'you got an error'})
+            } else {
+                res.send(item)
+            }
+        })
+    })
+
     app.post('/notes', (req, res) => {
         const note = {title: req.body.title, text: req.body.body};
         db.collection('notes').insert(note, (e, result) => {
@@ -22,6 +35,18 @@ module.exports = (app, db) => {
                 res.send(result.ops[0])
             }
 
+        })
+    })
+
+    app.delete('/notes/:id', (req, res) => {
+        const id = req.params.id
+        const details = {'_id' : new ObjectID(id)};
+        db.collection('notes').remove(details, (e, item) => {
+            if(e){
+                res.send({'error':'you got an error'})
+            } else {
+                res.send(`Note ${id} was deleted`);
+            }
         })
     })
 }
