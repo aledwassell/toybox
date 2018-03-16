@@ -22,15 +22,16 @@
   <body ng-app="toybox_app">
 
     <div ng-controller="chartsCtrl">
-
-      <canvas id="pie" class="chart chart-pie"
-              chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options">
-      </canvas>
-      <div>
-        <rzslider
-                rz-slider-model="slider.value"
-                rz-slider-options="slider.options"></rzslider>
-      </div>
+        <div style="height: 500px; width: 500px">
+            <canvas id="pie" class="chart chart-pie"
+                    chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="data">
+            </canvas>
+            <div>
+                <rzslider
+                        rz-slider-model="slider.value"
+                        rz-slider-options="slider.options"></rzslider>
+            </div>
+        </div>
     </div>
   </body>
 </html>
