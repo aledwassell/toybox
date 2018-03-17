@@ -5,21 +5,22 @@
             return $resource('/notes', {}, {
                 post: {
                     method: 'POST',
-                    hasBody: true
+                    isArray: false,
+                    headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                 }
             })
         })
         .controller('dataController', ['$scope', 'data', function($scope, data){
             $scope.dataService = data;
-            $scope.sendModel = {title: '', text:''};
+            $scope.sendModel = {
+                title: '',
+                text: ''
+            };
+
             $scope.send = function () {
-                $scope.dataService.post({ param: $scope.sendModel }, $scope.sendModel)
-                console.log(($scope.sendModel))
+                console.log($scope.sendModel)
+                $scope.dataService.post({param: ''}, $scope.sendModel);
             }
-        }])
-        .controller('test', ['$scope', function ($scope) {
-            console.log($scope);
-            $scope.test = 'test';
         }])
 
 
