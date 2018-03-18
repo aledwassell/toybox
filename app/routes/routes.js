@@ -18,7 +18,7 @@ module.exports = (app, db) => {
     app.put('/notes/:id', (req, res) => {
         const id = req.params.id
         const details = {'_id' : new ObjectID(id)};
-        const note = {title: req.body.title, text: req.body.body};
+        const note = {title: req.body.title, text: req.body.text, id: req.body.id};
         db.collection('notes').update(details, note, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
@@ -29,7 +29,7 @@ module.exports = (app, db) => {
     })
 
     app.post('/notes', jsonParser, (req, res) => {
-        const note = {title: req.body.title, text: req.body.body};
+        const note = {title: req.body.title, text: req.body.text, id: req.body.id};
         db.collection('notes').insert(note, (e, result) => {
             if(e) {
                 res.send({'error' : 'error was found'})
@@ -41,10 +41,10 @@ module.exports = (app, db) => {
         })
     });
 
-    app.delete('/notes/:id', (req, res) => {
-        const id = req.params.id
+    app.delete('/notes/:id', jsonParser, (req, res) => {
+        const id = req.body.id
         const details = {'_id' : new ObjectID(id)};
-        db.collection('notes').remove(details, (e, item) => {
+        db.collection('notes').remove(id, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
             } else {

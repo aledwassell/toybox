@@ -14,26 +14,21 @@
                 delete: {
                     method: 'DELETE',
                     isArray: false,
-                    id: '@id'
                 }
             })
         })
         .controller('dataController', ['$scope', 'data', function($scope, data){
             $scope.dataService = data;
-            $scope.sendModel = {
-                title: '',
-                body: ''
-            };
+            $scope.sendModel = {};
             $scope.deleteModel = {};
 
-            $scope.id = '5aab72728b4b9d1c56dc0fc9';
-
             $scope.delete = function () {
-                $scope.dataService.delete({params: $scope.deleteModel.id});
+                console.log($scope.deleteModel.id)
+                $scope.dataService.delete($scope.deleteModel.id);
             }
 
             $scope.get = function () {
-                $scope.dataService.get('notes/5aab72728b4b9d1c56dc0fc9');
+                $scope.dataService.get({params: 'cheese'});
             }
 
             $scope.send = function () {
