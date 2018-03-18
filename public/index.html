@@ -20,29 +20,34 @@
 
   </head>
   <body ng-app="toybox_app">
+      <div ng-controller="dataController">
+          <input type="text" placeholder="title" ng-model="sendModel.title">
+          <input type="text" placeholder="body" ng-model="sendModel.body">
+          <input type="number" placeholder="body" ng-model="sendModel.id">
+          <button ng-click="send()">Send POST</button>
+          <button ng-click="get()">GET</button>
+      </div>
+      <div ng-controller="dataController">
+          <input type="number" placeholder="body" ng-model="deleteModel.id">
+          <button ng-click="delete()">Delete</button>
+      </div>
+      <div ng-controller="chartsCtrl">
+          <div style="height: 300px; width: 500px">
+              <canvas id="pie" class="chart chart-pie"
+                      chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="data">
+              </canvas>
+              <div>
+                  <rzslider
+                          rz-slider-model="slider1.value"
+                          rz-slider-options="slider1.options"></rzslider>
+              </div>
+              <div>
+                  <rzslider
+                          rz-slider-model="slider2.value"
+                          rz-slider-options="slider1.options"></rzslider>
+              </div>
+          </div>
+      </div>
 
-    <div ng-controller="chartsCtrl">
-        <div style="height: 500px; width: 500px">
-            <canvas id="pie" class="chart chart-pie"
-                    chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="data">
-            </canvas>
-            <div>
-                <rzslider
-                        rz-slider-model="slider1.value"
-                        rz-slider-options="slider1.options"></rzslider>
-            </div>
-            <div>
-                <rzslider
-                        rz-slider-model="slider2.value"
-                        rz-slider-options="slider1.options"></rzslider>
-            </div>
-        </div>
-    </div>
-  <div ng-controller="dataController">
-      <input type="text" placeholder="title" ng-model="sendModel.title">
-      <input type="text" placeholder="body" ng-model="sendModel.body">
-      <button ng-click="send()">Send POST</button>
-      <button ng-click="get()">GET</button>
-  </div>
   </body>
 </html>

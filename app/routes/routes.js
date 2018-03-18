@@ -15,21 +15,6 @@ module.exports = (app, db) => {
         })
     })
 
-    app.get('/notes/person/:id', (req, res) => {
-        console.log(req);
-        res.send(
-            '<h1>Person' + req.params.id + '</h1>'
-        )
-    });
-
-    app.post('/notes/person/:id', (req, res) => {
-        console.log(req);
-        res.send(
-            '<h1>Person' + req.params.id + '</h1>'
-        )
-    });
-
-
     app.put('/notes/:id', (req, res) => {
         const id = req.params.id
         const details = {'_id' : new ObjectID(id)};

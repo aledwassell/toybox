@@ -10,8 +10,11 @@
                 get: {
                     method: 'GET',
                     isArray: false,
-                    url: ''
-                    // headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+                },
+                delete: {
+                    method: 'DELETE',
+                    isArray: false,
+                    id: '@id'
                 }
             })
         })
@@ -21,8 +24,13 @@
                 title: '',
                 body: ''
             };
+            $scope.deleteModel = {};
 
-            $scope.id = '5aab72728b4b9d1c56dc0fc9'
+            $scope.id = '5aab72728b4b9d1c56dc0fc9';
+
+            $scope.delete = function () {
+                $scope.dataService.delete({params: $scope.deleteModel.id});
+            }
 
             $scope.get = function () {
                 $scope.dataService.get('notes/5aab72728b4b9d1c56dc0fc9');
