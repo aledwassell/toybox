@@ -40,8 +40,9 @@
     </div>
   <div ng-controller="dataController">
       <input type="text" placeholder="title" ng-model="sendModel.title">
-      <input type="text" placeholder="body" ng-model="sendModel.text">
+      <input type="text" placeholder="body" ng-model="sendModel.body">
       <button ng-click="send()">Send POST</button>
+      <button ng-click="get()">GET</button>
   </div>
   </body>
 </html>

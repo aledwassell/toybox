@@ -1,4 +1,6 @@
-var ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
 module.exports = (app, db) => {
     app.get('/notes/:id', (req, res) => {
@@ -13,6 +15,21 @@ module.exports = (app, db) => {
         })
     })
 
+    app.get('/notes/person/:id', (req, res) => {
+        console.log(req);
+        res.send(
+            '<h1>Person' + req.params.id + '</h1>'
+        )
+    });
+
+    app.post('/notes/person/:id', (req, res) => {
+        console.log(req);
+        res.send(
+            '<h1>Person' + req.params.id + '</h1>'
+        )
+    });
+
+
     app.put('/notes/:id', (req, res) => {
         const id = req.params.id
         const details = {'_id' : new ObjectID(id)};
@@ -26,17 +43,18 @@ module.exports = (app, db) => {
         })
     })
 
-    app.post('/notes', (req, res) => {
+    app.post('/notes', jsonParser, (req, res) => {
         const note = {title: req.body.title, text: req.body.body};
         db.collection('notes').insert(note, (e, result) => {
             if(e) {
                 res.send({'error' : 'error was found'})
             } else {
+                console.log(res.body)
                 res.send(result.ops[0])
             }
 
         })
-    })
+    });
 
     app.delete('/notes/:id', (req, res) => {
         const id = req.params.id

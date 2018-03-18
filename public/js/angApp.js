@@ -5,8 +5,13 @@
             return $resource('/notes', {}, {
                 post: {
                     method: 'POST',
+                    isArray: false
+                },
+                get: {
+                    method: 'GET',
                     isArray: false,
-                    headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+                    url: ''
+                    // headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                 }
             })
         })
@@ -14,12 +19,17 @@
             $scope.dataService = data;
             $scope.sendModel = {
                 title: '',
-                text: ''
+                body: ''
             };
 
+            $scope.id = '5aab72728b4b9d1c56dc0fc9'
+
+            $scope.get = function () {
+                $scope.dataService.get('notes/5aab72728b4b9d1c56dc0fc9');
+            }
+
             $scope.send = function () {
-                console.log($scope.sendModel)
-                $scope.dataService.post({param: ''}, $scope.sendModel);
+                $scope.dataService.post($scope.sendModel);
             }
         }])
 
