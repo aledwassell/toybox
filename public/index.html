@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Promises</title>
-     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
@@ -15,39 +15,48 @@
     <script type="text/javascript" src="components/chart.js/dist/Chart.min.js"></script>
     <script type="text/javascript" src="components/angular-chart.js/dist/angular-chart.min.js"></script>
 
-    <script type="text/javascript" src="js/angApp.js"></script>
+    <script type="text/javascript" src="components/quagga/dist/quagga.min.js"></script>
+
+
     <!-- <script src="js/handlebars-v4.0.5.js" charset="utf-8"></script> -->
 
-  </head>
-  <body ng-app="toybox_app">
-      <div ng-controller="dataController">
-          <input type="text" placeholder="title" ng-model="sendModel.title">
-          <input type="text" placeholder="body" ng-model="sendModel.body">
-          <input type="number" placeholder="body" ng-model="sendModel.id">
-          <button ng-click="send()">Send POST</button>
-          <button ng-click="get()">GET</button>
-      </div>
-      <div ng-controller="dataController">
-          <input type="number" placeholder="body" ng-model="deleteModel.id">
-          <button ng-click="delete()">Delete</button>
-      </div>
-      <div ng-controller="chartsCtrl">
-          <div style="height: 300px; width: 500px">
-              <canvas id="pie" class="chart chart-pie"
-                      chart-data="data"  chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="data">
-              </canvas>
-              <div>
-                  <rzslider
-                          rz-slider-model="slider1.value"
-                          rz-slider-options="slider1.options"></rzslider>
-              </div>
-              <div>
-                  <rzslider
-                          rz-slider-model="slider2.value"
-                          rz-slider-options="slider1.options"></rzslider>
-              </div>
-          </div>
-      </div>
+</head>
+<body>
+<div  ng-app="toybox_app">
+    <div ng-controller="dataController">
+        <input type="text" placeholder="title" ng-model="sendModel.title">
+        <input type="text" placeholder="body" ng-model="sendModel.body">
+        <input type="number" placeholder="body" ng-model="sendModel.id">
+        <button ng-click="send()">Send POST</button>
+        <button ng-click="get()">GET</button>
+    </div>
+    <div ng-controller="dataController">
+        <input type="number" placeholder="body" ng-model="deleteModel.id">
+        <button ng-click="delete()">Delete</button>
+    </div>
+    <div ng-controller="quaggaController">
+        <span id="quaggaTarget"></span>
+    </div>
+    <!--<div ng-controller="chartsCtrl">-->
+    <!--<div style="height: 300px; width: 500px">-->
+    <!--<canvas id="pie" class="chart chart-pie"-->
+    <!--chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options"-->
+    <!--chart-dataset-override="data">-->
+    <!--</canvas>-->
+    <!--<div>-->
+    <!--<rzslider-->
+    <!--rz-slider-model="slider1.value"-->
+    <!--rz-slider-options="slider1.options"></rzslider>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<rzslider-->
+    <!--rz-slider-model="slider2.value"-->
+    <!--rz-slider-options="slider1.options"></rzslider>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
 
-  </body>
+<script type="text/javascript" src="js/angApp.js"></script>
+</body>
 </html>

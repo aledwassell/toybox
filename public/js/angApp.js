@@ -14,6 +14,7 @@
                 delete: {
                     method: 'DELETE',
                     isArray: false,
+                    id: '@id'
                 }
             })
         })
@@ -36,11 +37,33 @@
             }
         }])
 
+        .controller('quaggaController', ['$scope', function($scope){
+
+            console.log(Quagga);
+            Quagga.init({
+                inputStream : {
+                    name : "Live",
+                    type : "LiveStream",
+                    target: document.getElementById('#quaggaTarget')    // Or '#yourElement' (optional)
+                },
+                decoder : {
+                    readers : ["code_128_reader"]
+                }
+            }, function(err) {
+                if (err) {
+                    console.log('You got an error: ', err);
+                    return
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+            })
+        }])
 
 
 
 
-        .controller("chartsCtrl", ['$scope', function ($scope) {
+
+        /*.controller("chartsCtrl", ['$scope', function ($scope) {
             let maxCalls = 150;
             let currentCalls = 140;
             let alarmValue = 50;
@@ -144,5 +167,5 @@
                 animation: false
             };
 
-        }]);
+        }]);*/
 })();
