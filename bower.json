@@ -23,6 +23,7 @@
     "angularjs-slider": "^6.5.0",
     "angular-chart.js": "^1.1.1",
     "Chart.js": "2.4.0",
-    "quagga": "^0.12.1"
+    "quagga": "^0.12.1",
+    "webrtc-adapter": "^6.1.4"
   }
 }
