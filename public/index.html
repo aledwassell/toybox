@@ -40,37 +40,26 @@
         <span id="quaggaTarget"></span>
     </div>
     <div ng-controller="gaugeController">
-        <ng-gauge size="200"
-                  type="full"
-                  thick="5"
+        <ng-gauge size="500"
+                  type="arch"
+                  thick="10"
                   min="0"
-                  max="120"
-                  value="68.2"
+                  max="slider.options.ceil"
+                  value="slider.value"
                   cap="round"
-                  label="Speed"
+                  label="Alarm: {{gauge.thresholds[2]}}"
                   foreground-color="#ffcc66"
-                  background-color="rgba(255,255,255, 0.4)"
-                  append="mph"></ng-gauge>
+                  background-color="rgba(0,0,0, 0.2)"
+                  append="%"
+                  thresholds="gauge.thresholds"></ng-gauge>
+        <rzslider
+                rz-slider-model="slider.value"
+                rz-slider-options="slider.options"
+        ></rzslider>
     </div>
 
-    <!--<div ng-controller="chartsCtrl">-->
-    <!--<div style="height: 300px; width: 500px">-->
-    <!--<canvas id="pie" class="chart chart-pie"-->
-    <!--chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options"-->
-    <!--chart-dataset-override="data">-->
-    <!--</canvas>-->
-    <!--<div>-->
-    <!--<rzslider-->
-    <!--rz-slider-model="slider1.value"-->
-    <!--rz-slider-options="slider1.options"></rzslider>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<rzslider-->
-    <!--rz-slider-model="slider2.value"-->
-    <!--rz-slider-options="slider1.options"></rzslider>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+
+
 </div>
 
 <script type="text/javascript" src="js/angApp.js"></script>
