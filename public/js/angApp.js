@@ -41,7 +41,7 @@
             if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
                 // safely access `navigator.mediaDevices.getUserMedia`
                 console.log('browser be cool')
-                let app = {
+                let scanner = {
 
                     init: function () {
                         Quagga.init(this.state, function (err) {
@@ -51,6 +51,10 @@
                             }
                             console.log("Initialization finished. Ready to start");
                             Quagga.start();
+                        }),
+                        Quagga.onDetected((data) => {
+                            console.log(data)
+                            Quagga.stop();
                         })
                     },
                     state: {
@@ -69,32 +73,33 @@
                             readers: ["code_128_reader"]
                         }
                     }
-                }
-                app.init()
+
+                };
+                scanner.init()
             }
 
         }])
         .controller('gaugeController', ['$scope', function ($scope) {
-            $scope.gauge = {
-                thresholds:{
-                    '0': {color: 'green'},
-                    '40': {color: 'orange'},
-                    '75': {color: 'red'}
-                },
-                value: setInterval(() => {
-                        return Math.floor(Math.random() * Math.floor(100))
-                    }, 500)
-            }
-            $scope.slider = {
-                value: 0,
-                options: {
-                    disabled: false,
-                    floor: 0,
-                    ceil: 100,
-                    translate: (v) => {
-                        return `${v}%`;
-                    }
-                }
-            };
+            // $scope.gauge = {
+            //     thresholds:{
+            //         '0': {color: 'green'},
+            //         '40': {color: 'orange'},
+            //         '75': {color: 'red'}
+            //     },
+            //     value: setInterval(() => {
+            //             return Math.floor(Math.random() * Math.floor(100))
+            //         }, 500)
+            // }
+            // $scope.slider = {
+            //     value: 0,
+            //     options: {
+            //         disabled: false,
+            //         floor: 0,
+            //         ceil: 100,
+            //         translate: (v) => {
+            //             return `${v}%`;
+            //         }
+            //     }
+            // };
         }]);
 })();
