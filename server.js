@@ -1,4 +1,4 @@
-const port = 3000;
+const port = process.env.PORT || 3000;
 const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -9,6 +9,11 @@ const app = express();
 
 const urlencodedParser = bodyParser.urlencoded({extended: true})
 const jsonParser = bodyParser.json();
+
+// middleware
+app.get('/')
+
+
 
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));

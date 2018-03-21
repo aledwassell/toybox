@@ -37,7 +37,7 @@
             }
         }])
 
-        .controller('quaggaController', ['$scope', function($scope){
+        .controller('scannerController', ['$scope', function($scope){
             if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
                 // safely access `navigator.mediaDevices.getUserMedia`
                 console.log('browser be cool')
@@ -54,7 +54,6 @@
                         }),
                         Quagga.onDetected((data) => {
                             console.log(data)
-                            Quagga.stop();
                         })
                     },
                     state: {
