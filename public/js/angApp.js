@@ -64,7 +64,7 @@
                         }),
                         Quagga.onDetected((data) => {
                             console.log(data)
-                            $scope.factory.get()
+                            $scope.factory.get(data.codeResult.code)
 
                         })
                     },
