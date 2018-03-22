@@ -19,11 +19,10 @@
             })
         })
         .factory('barcodeQuery', ($resource) => {
-            return $resource('/queryBC/', {code:'@code'}, {
+            return $resource('/querybc/', {}, {
                 get: {
                     method: 'GET',
-                    isArray: false,
-                    code: '@code'
+                    isArray: false
                 }
             })
         })
@@ -64,8 +63,7 @@
                         }),
                         Quagga.onDetected((data) => {
                             console.log(data)
-                            $scope.factory.get(data.codeResult.code)
-
+                            $scope.factory.get({code: data.codeResult.code})
                         })
                     },
                     state: {
@@ -81,7 +79,14 @@
                             target: document.querySelector('#quaggaTarget')    // Or '#yourElement' (optional)
                         },
                         decoder: {
-                            readers: ["code_128_reader"]
+                            readers: [{
+                                format: "ean_reader",
+                                config: {
+                                    supplements: [
+                                        'ean_5_reader', 'ean_2_reader'
+                                    ]
+                                }
+                            }]
                         }
                     }
 

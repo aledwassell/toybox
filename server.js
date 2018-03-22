@@ -11,23 +11,6 @@ const app = express();
 const urlencodedParser = bodyParser.urlencoded({extended: true})
 const jsonParser = bodyParser.json();
 
-app.get('queryBC/:code', (req, res) => {
-    if(!req.params.code){
-        res.status(500);
-        res.send('Error on server, you need to rovide a valid barcode');
-        console.log('There was an error, user did not provide barcode')
-    }
-    console.log(req.params.code);
-    request.get({
-        //url: `api url&${req.params.code}`
-    }, (e, response, body) => {
-        if(!e && response.status.code === 200) {
-            res.send(body)
-        }
-    })
-})
-
-
 
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
