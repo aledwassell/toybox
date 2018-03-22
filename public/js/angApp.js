@@ -18,6 +18,15 @@
                 }
             })
         })
+        .factory('barcodeQuery', ($resource) => {
+            return $resource('/queryBC/', {code:'@code'}, {
+                get: {
+                    method: 'GET',
+                    isArray: false,
+                    code: '@code'
+                }
+            })
+        })
         .controller('dataController', ['$scope', 'data', function($scope, data){
             $scope.dataService = data;
             $scope.sendModel = {};
@@ -37,7 +46,8 @@
             }
         }])
 
-        .controller('scannerController', ['$scope', function($scope){
+        .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){
+            $scope.factory = barcodeQuery;
             if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
                 // safely access `navigator.mediaDevices.getUserMedia`
                 console.log('browser be cool')
@@ -54,6 +64,8 @@
                         }),
                         Quagga.onDetected((data) => {
                             console.log(data)
+                            $scope.factory.get()
+
                         })
                     },
                     state: {

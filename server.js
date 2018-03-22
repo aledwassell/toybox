@@ -18,7 +18,7 @@ app.get('queryBC/:code', (req, res) => {
         console.log('There was an error, user did not provide barcode')
     }
     request.get({
-        url: `api url&${req.params.code}&key=${}`
+        url: `api url&${req.params.code}`
     }, (e, response, body) => {
         if(!e && response.status.code === 200) {
             res.send(body)
