@@ -37,7 +37,7 @@
             }
 
             $scope.get = function () {
-                $scope.dataService.get({params: 'cheese'});
+                $scope.dataService.get($scope.sendModel.id);
             }
 
             $scope.send = function () {

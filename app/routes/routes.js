@@ -3,10 +3,9 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 module.exports = (app, db) => {
-    app.get('/notes/:id', (req, res) => {
-        const id = req.params.id
-        const details = {'_id' : new ObjectID(id)};
-        db.collection('notes').findOne(details, (e, item) => {
+    app.get('/notes', (req, res) => {
+        const id = req.body.id;
+        db.collection('notes').findOne(id, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
             } else {
@@ -43,7 +42,6 @@ module.exports = (app, db) => {
 
     app.delete('/notes', jsonParser, (req, res) => {
         const id = req.body.id
-        // const details = {'_id' : new ObjectID(id)};
         db.collection('notes').deleteOne(id, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
