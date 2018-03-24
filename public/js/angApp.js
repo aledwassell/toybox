@@ -5,7 +5,8 @@
             return $resource('/notes', {}, {
                 post: {
                     method: 'POST',
-                    isArray: false
+                    isArray: false,
+                    id: '@id'
                 },
                 get: {
                     method: 'GET',
@@ -15,6 +16,10 @@
                     method: 'DELETE',
                     isArray: false,
                     id: '@id'
+                },
+                getAll: {
+                    method: 'GET',
+                    isArray: false
                 }
             })
         })
@@ -43,6 +48,8 @@
             $scope.send = function () {
                 $scope.dataService.post($scope.sendModel);
             }
+
+
         }])
 
         .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){

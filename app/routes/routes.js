@@ -4,7 +4,17 @@ const jsonParser = bodyParser.json();
 
 module.exports = (app, db) => {
     app.get('/notes', (req, res) => {
-        const id = req.body.id;
+        const id = req.body;
+        db.collection('notes').findOne(id, (e, item) => {
+            if(e){
+                res.send({'error':'you got an error'})
+            } else {
+                res.send(item)
+            }
+        })
+    });
+    app.get('/notes', (req, res) => {
+        const id = req.body;
         db.collection('notes').findOne(id, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
