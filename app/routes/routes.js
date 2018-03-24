@@ -41,10 +41,10 @@ module.exports = (app, db) => {
         })
     });
 
-    app.delete('/notes/:id', jsonParser, (req, res) => {
+    app.delete('/notes', jsonParser, (req, res) => {
         const id = req.body.id
-        const details = {'_id' : new ObjectID(id)};
-        db.collection('notes').remove(id, (e, item) => {
+        // const details = {'_id' : new ObjectID(id)};
+        db.collection('notes').deleteOne(id, (e, item) => {
             if(e){
                 res.send({'error':'you got an error'})
             } else {
