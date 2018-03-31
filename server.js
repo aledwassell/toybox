@@ -12,11 +12,11 @@ const urlencodedParser = bodyParser.urlencoded({extended: true})
 const jsonParser = bodyParser.json();
 
 const dat = [
-    {id: 1, name: 'Clive'},
-    {id: 2, name: 'Dave'},
-    {id: 3, name: 'Peter'},
-    {id: 4, name: 'Pat'},
-    {id: 5, name: 'Carl'}
+    {id: 1, name: 'Clive', address:'26, milton terrace', age: 80, food: 'pizza'},
+    {id: 2, name: 'Dave', address:'26, milton terrace', age: 80, food: 'pizza'},
+    {id: 3, name: 'Peter', address:'26, milton terrace', age: 80, food: 'pizza'},
+    {id: 4, name: 'Pat', address:'26, milton terrace', age: 80, food: 'pizza'},
+    {id: 5, name: 'Carl', address:'26, milton terrace', age: 80, food: 'pizza'}
 ];
 
 const getElementById = (id, arr) => {
@@ -39,7 +39,7 @@ app.get('/api/:id', (req, res) => {
     if(gotDat !== undefined){
         res.send(gotDat);
     } else {
-        res.status(404).send(`an error occured.`)
+        res.status(404).send(`No records with id ${req.params.id}`)
     }
 
 })
