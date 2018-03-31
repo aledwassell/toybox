@@ -16,22 +16,16 @@ const dat = [
     {id: 2, name: 'Dave'},
     {id: 3, name: 'Peter'},
     {id: 4, name: 'Pat'},
-    {id: 5, name: 'Carl'},
+    {id: 5, name: 'Carl'}
 ];
 
-const getElementById = (id, array) => {
+const getElementById = (id, arr) => {
     let returnedVal;
-    for(let i = 0; i < array.length; i++) {
-        if(i.id === id){
-            console.log(i)
-            returnedVal = i;
-        } else {
-            returnedVal = undefined;
+    for(let i = 0; i < arr.length; i++) {
+        if(id == arr[i].id){
+            returnedVal = arr[i];
         }
     }
-
-
-
     console.log(returnedVal)
     if(returnedVal){
         return returnedVal
