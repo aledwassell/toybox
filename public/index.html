@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
     <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome-all.css">
 
@@ -28,7 +29,7 @@
 <div  ng-app="toybox_app">
     <nav ng-controller="navigationCtrl" class="nav">
         <ul>
-            <li ng-repeat="link in links"><a href="">{{link.name}}</a></li>
+            <li ng-repeat="link in links"><a href="/weather">{{link.name}}</a></li>
         </ul>
     </nav>
     <div ng-controller="dataController">

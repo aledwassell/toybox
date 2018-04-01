@@ -1,6 +1,13 @@
 (function () {
     'use strict';
-    var toybox_app = angular.module('toybox_app', ['ngResource', 'rzModule', 'chart.js', 'angularjs-gauge'])
+    var toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute', 'rzModule', 'chart.js', 'angularjs-gauge'])
+        .config(($routeProvider, $locationProvider) => {
+            $routeProvider
+                .when('/weather', {
+                    templateUrl: 'public/views/weather.html',
+                    controller: 'weatherController'
+                })
+        })
         .factory('data', function ($resource) {
             return $resource('/notes', {}, {
                 post: {
@@ -33,8 +40,11 @@
         })
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url:'/', name: 'home'}
+                {url:'/weather', name: 'Weather'}
             ]
+        }])
+        .controller('weatherController', ['$scope', function ($scope) {
+
         }])
         .controller('dataController', ['$scope', 'data', function($scope, data){
             $scope.dataService = data;
