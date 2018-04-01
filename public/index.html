@@ -24,7 +24,13 @@
 
 </head>
 <body>
+
 <div  ng-app="toybox_app">
+    <nav ng-controller="navigationCtrl" class="nav">
+        <ul>
+            <li ng-repeat="link in links"><a href="">{{link.name}}</a></li>
+        </ul>
+    </nav>
     <div ng-controller="dataController">
         <input type="text" placeholder="title" ng-model="sendModel.title">
         <input type="text" placeholder="body" ng-model="sendModel.body">

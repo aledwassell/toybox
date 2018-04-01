@@ -31,6 +31,11 @@
                 }
             })
         })
+        .controller('navigationCtrl', ['$scope', function ($scope) {
+            $scope.links = [
+                {url:'/', name: 'home'}
+            ]
+        }])
         .controller('dataController', ['$scope', 'data', function($scope, data){
             $scope.dataService = data;
             $scope.sendModel = {};
