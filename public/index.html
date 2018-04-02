@@ -24,14 +24,11 @@
 
 <div  ng-app="toybox_app">
     <div>
-        <nav ng-controller="navigationCtrl" class="nav w-100">
-
-            <a href="{{link.url}}" ng-repeat="link in links" class="pa5 f5 ma1 mt5 bg-dark-blue helvetica w-10">
-                <span>
-                    {{link.name}}
-                </span>
-            </a>
-
+        <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
+            <a class="link dim black b f3 f-headline-ns tc db mb3 mb4-ns" href="#" title="Home">How do I recycle this?</a>
+            <div class="tc pb3">
+                <a ng-repeat="link in links" class="link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">{{link.name}}</a>
+            </div>
         </nav>
     </div>
 

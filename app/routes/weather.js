@@ -9,9 +9,9 @@ module.exports = (app) => {
         request(
             `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${apiKey}`, (e, response, body) => {
             if(!e) {
-                res.send(body)
+                res.send('I got data')
             } else if (e){
-                res.status(404).send(`There was an error in your request ${e}`);
+                res.status(404).send(`There was an error in your request ${e} error`);
             }
         })
     }
