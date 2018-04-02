@@ -17,59 +17,43 @@
     <script type="text/javascript" src="components/angular-chart.js/dist/angular-chart.min.js"></script>
     <script type="text/javascript" src="components/angularjs-gauge/src/angularjs-gauge.js"></script>
 
-    <script type="text/javascript" src="components/webrtc-adapter/release/adapter.js"></script>
     <script type="text/javascript" src="components/quagga/dist/quagga.min.js"></script>
-
-
-    <!-- <script src="js/handlebars-v4.0.5.js" charset="utf-8"></script> -->
 
 </head>
 <body>
 
 <div  ng-app="toybox_app">
-    <nav ng-controller="navigationCtrl" class="nav">
-        <ul>
-            <li ng-repeat="link in links"><a href="/weather">{{link.name}}</a></li>
-        </ul>
-    </nav>
-    <div ng-controller="dataController">
-        <input type="text" placeholder="title" ng-model="sendModel.title">
-        <input type="text" placeholder="body" ng-model="sendModel.body">
-        <input type="number" placeholder="body" ng-model="sendModel.id">
-        <button ng-click="send()">Send POST</button>
-        <button ng-click="get()">GET</button>
+    <div>
+        <nav ng-controller="navigationCtrl" class="nav w-100">
+
+            <a href="{{link.url}}" ng-repeat="link in links" class="pa5 f5 ma1 mt5 bg-dark-blue helvetica w-10">
+                <span>
+                    {{link.name}}
+                </span>
+            </a>
+
+        </nav>
     </div>
-    <div ng-controller="dataController">
-        <input type="number" placeholder="body" ng-model="deleteModel.id">
-        <button ng-click="delete()">Delete</button>
-    </div>
+
+
+
+    <!--<div ng-controller="dataController">-->
+        <!--<input type="text" placeholder="title" ng-model="sendModel.title">-->
+        <!--<input type="text" placeholder="body" ng-model="sendModel.body">-->
+        <!--<input type="number" placeholder="body" ng-model="sendModel.id">-->
+        <!--<button ng-click="send()">Send POST</button>-->
+        <!--<button ng-click="get()">GET</button>-->
+    <!--</div>-->
+    <!--<div ng-controller="dataController">-->
+        <!--<input type="number" placeholder="body" ng-model="deleteModel.id">-->
+        <!--<button ng-click="delete()">Delete</button>-->
+    <!--</div>-->
 
 
 
     <div ng-controller="scannerController">
         <span id="quaggaTarget"></span>
     </div>
-    <!--<div ng-controller="gaugeController">
-        <ng-gauge size="500"
-                  type="arch"
-                  thick="10"
-                  min="0"
-                  max="slider.options.ceil"
-                  value="slider.value"
-                  cap="round"
-                  label="Alarm: {{gauge.thresholds[2]}}"
-                  foreground-color="#ffcc66"
-                  background-color="rgba(0,0,0, 0.2)"
-                  append="%"
-                  thresholds="gauge.thresholds"></ng-gauge>
-        <rzslider
-                rz-slider-model="slider.value"
-                rz-slider-options="slider.options"
-        ></rzslider>
-    </div>-->
-
-
-
 </div>
 
 <script type="text/javascript" src="js/angApp.js"></script>

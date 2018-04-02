@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mustache dataView.json myTemplate.mustache > index.html",
-    "start": "nodemon --watch public --watch app server.js -e html,css,js"
+    "start": "gulp default"
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +21,9 @@
     "reload": "^2.2.2"
   },
   "devDependencies": {
-    "handlebars": "^4.0.11",
-    "handlebars-loader": "^1.6.0",
+    "browser-sync": "^1.3.3",
+    "gulp": "^3.8.7",
+    "gulp-nodemon": "^1.0.4",
     "path": "^0.12.7"
   }
 }

@@ -40,6 +40,7 @@
         })
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
+                {url:'/', name: 'Home'},
                 {url:'/weather', name: 'Weather'}
             ]
         }])
