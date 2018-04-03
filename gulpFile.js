@@ -3,6 +3,8 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const nodemon = require('gulp-nodemon');
+const sass = require('gulp-sass');
+const minifyCSS = require('gulp-csso');
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
@@ -58,7 +60,10 @@ gulp.task('js',  function () {
 });
 
 gulp.task('css', function () {
-    return gulp.src('public/css/*.css')
+    return gulp.src('public/css/*.sass')
+        .pipe(sass())
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('public/css'))
         .pipe(browserSync.reload({ stream: true }));
 })
 
