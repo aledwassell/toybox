@@ -10,7 +10,11 @@
                 .when("/weather", {
                     controller: "weatherController",
                     templateUrl : "views/weather.htm"
-                });
+                })
+                .when("/photos", {
+                    controller: "photos",
+                    templateUrl : "views/photos.htm"
+                })
         })
         .factory('data', function ($resource) {
             return $resource('/notes', {}, {
@@ -51,6 +55,14 @@
                 }
             })
         })
+        .factory('flickrPhotos', ($resource) => {
+            return $resource('/photos', {}, {
+                get: {
+                    method: 'GET',
+                    isArray: false
+                }
+            })
+        })
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
                 {url:'/', name: 'Home'},
@@ -87,6 +99,16 @@
                 $scope.dataService.post($scope.sendModel);
             }
 
+
+        }])
+        .controller('photos', ['$scope', 'flickrPhotos', function ($scope, flickrPhotos) {
+            $scope.service = flickrPhotos;
+
+            $scope.getPhotos = () => {
+                $scope.pictures = $scope.service.get();
+                console.log($scope.pictures);
+            }
+            $scope.getPhotos();
 
         }])
 
