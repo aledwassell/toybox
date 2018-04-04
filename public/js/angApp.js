@@ -1,12 +1,16 @@
 (function () {
     'use strict';
     var toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute', 'rzModule', 'chart.js', 'angularjs-gauge'])
-        .config(($routeProvider, $locationProvider) => {
+        .config(function($routeProvider) {
             $routeProvider
-                .when('/weather', {
-                    templateUrl: 'public/views/weather.html',
-                    controller: 'weatherController'
+                .when('/', {
+                    controller: "main",
+                    templateUrl : "views/main.htm"
                 })
+                .when("/weather", {
+                    controller: "weatherController",
+                    templateUrl : "views/weather.htm"
+                });
         })
         .factory('data', function ($resource) {
             return $resource('/notes', {}, {
@@ -38,13 +42,31 @@
                 }
             })
         })
+        .factory('weatherFactory', ($resource) => {
+            return $resource('/weather/:place', {}, {
+                get: {
+                    method: 'GET',
+                    isArray: false,
+                    params: '@place'
+                }
+            })
+        })
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
                 {url:'/', name: 'Home'},
-                {url:'/weather', name: 'Weather'}
+                {url:'#!/weather', name: 'Weather'}
             ]
         }])
-        .controller('weatherController', ['$scope', function ($scope) {
+        .controller('weatherController', ['$scope', 'weatherFactory', function ($scope, weatherFactory) {
+            $scope.service = weatherFactory;
+            $scope.setLoc = '';
+            $scope.clear = function () {
+                $scope.setLoc = '';
+            }
+            $scope.getWeather = () => {
+                $scope.weather = $scope.service.get({place: `${$scope.setLoc}`});
+            }
+
 
         }])
         .controller('dataController', ['$scope', 'data', function($scope, data){
