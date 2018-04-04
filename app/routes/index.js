@@ -8,5 +8,5 @@ module.exports = ((app, db) => {
     products(app, db);
     scanner(app, db);
     weather(app);
-    // flickrFetch(app);
+    flickrFetch(app);
 });
