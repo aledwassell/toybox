@@ -55,7 +55,7 @@
                 }
             })
         })
-        .factory('flickrPhotos', ($resource) => {
+        .factory('flickrPhotosProvider', ($resource) => {
             return $resource('/photos', {}, {
                 get: {
                     method: 'GET',
@@ -63,9 +63,8 @@
                 }
             })
         })
-        .service('PhotoService', ['flickrPhotos', function(flickrPhotos){
-            this.rawPhotoData = flickrPhotos.get();
-            console.log(this.rawPhotoData.photos);
+        .controller('main', ['$scope', function ($scope) {
+            
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
@@ -106,8 +105,8 @@
 
 
         }])
-        .controller('photos', ['$scope', 'PhotoService', function ($scope, PhotoService) {
-
+        .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
+            $scope.rawPhotoData = flickrPhotosProvider.get()
             // $scope.photoDat = $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
             //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
             // });
