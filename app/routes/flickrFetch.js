@@ -17,7 +17,7 @@ module.exports = (app) => {
             flickr.photos.search({
                 user_id: flickr.options.user_id,
                 page: 1,
-                per_page: 2
+                per_page: 5
             }, function(err, result) {
                 if(err){
                     res.send(`There was an error ${err}`)

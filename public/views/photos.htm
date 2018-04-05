@@ -1,6 +1,6 @@
-<div ng-repeat="pic in rawPhotoData.photos.photo">
-    <p>{{pic.title}}</p>
-    <img src="https://www.flickr.com/photos/29096781@N02/3606436456/" alt="">
-    <img src="https://farm{{pic.farm}}.staticflickr.com/{{cur.server}}/{{cur.id}}_{{cur.secret}}.jpg" alt="">
-
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;">
+    <div ng-repeat="pic in rawPhotoData.photos.photo">
+        <p>{{pic.title}}</p>
+        <img src="https://farm{{pic.farm}}.staticflickr.com/{{pic.server}}/{{pic.id}}_{{pic.secret}}_m.jpg" alt="">
+    </div>
 </div>
