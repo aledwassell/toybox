@@ -105,14 +105,16 @@
         .controller('photos', ['$scope', 'flickrPhotos', function ($scope, flickrPhotos) {
             $scope.service = flickrPhotos;
 
-            // result.photo.map((cur, index, array, thisArg) => {
-            //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
-            // });
+
             $scope.getPhotos = () => {
-                $scope.pictures = $scope.service.get();
-                console.log($scope.pictures);
+                $scope.rawData = $scope.service.get();
+                console.log($scope.rawData)
             }
             $scope.getPhotos();
+            $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
+                cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
+            });
+            console.log($scope.rawData);
 
         }])
 
