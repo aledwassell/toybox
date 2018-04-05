@@ -12,7 +12,6 @@ const Flickr = require('flickrapi'),
 
 
 module.exports = (app) => {
-
     const getPhoto = (req, res) => {
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
             flickr.photos.search({
@@ -20,9 +19,11 @@ module.exports = (app) => {
                 page: 1,
                 per_page: 2
             }, function(err, result) {
-                (err)
-                ? res.send(`There was an error ${err}`)
-                : res.send(result)
+                if(err){
+                    res.send(`There was an error ${err}`)
+                    return false;
+                }
+                res.send(result);
             });
         });
     }

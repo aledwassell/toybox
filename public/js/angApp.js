@@ -66,7 +66,8 @@
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
                 {url:'/', name: 'Home'},
-                {url:'#!/weather', name: 'Weather'}
+                {url:'#!/weather', name: 'Weather'},
+                {url:'#!/photos', name: 'Photos'}
             ]
         }])
         .controller('weatherController', ['$scope', 'weatherFactory', function ($scope, weatherFactory) {
@@ -104,6 +105,9 @@
         .controller('photos', ['$scope', 'flickrPhotos', function ($scope, flickrPhotos) {
             $scope.service = flickrPhotos;
 
+            // result.photo.map((cur, index, array, thisArg) => {
+            //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
+            // });
             $scope.getPhotos = () => {
                 $scope.pictures = $scope.service.get();
                 console.log($scope.pictures);
