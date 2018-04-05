@@ -63,6 +63,30 @@
                 }
             })
         })
+        .service('PhotoService', ['flickrPhotos', function(flickrPhotos){
+            let photoUrls = [];
+            this.loadPhotoUrls = function(){
+                return new Promise(
+                    function (resolve, reject) {
+                        flickrPhotos.get({}, function (results) {
+                            console.log(results)
+                            if (resolve && typeof resolve === 'function') {
+                                resolve(photoUrls);
+                            }
+
+                        }, function (resp) {
+                            if (reject && typeof reject === 'function') {
+                                reject(resp);
+                            }
+                        });
+                    }
+                )
+            };
+            this.loadPhotoUrls();
+            this.getPhotoUrls = function(){
+                return photoUrls;
+            }
+        }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
                 {url:'/', name: 'Home'},
@@ -102,20 +126,12 @@
 
 
         }])
-        .controller('photos', ['$scope', 'flickrPhotos', function ($scope, flickrPhotos) {
-            $scope.service = flickrPhotos;
-
-
-            $scope.getPhotos = () => {
-                $scope.rawData = $scope.service.get();
-                console.log($scope.rawData)
-            }
-            $scope.getPhotos();
-            $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
-                cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
-            });
-            console.log($scope.rawData);
-
+        .controller('photos', ['$scope', 'PhotoService', function ($scope, PhotoService) {
+            $scope.fots = PhotoService.getPhotoUrls();
+            console.log($scope.fots);
+            // $scope.photoDat = $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
+            //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
+            // });
         }])
 
         .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){
