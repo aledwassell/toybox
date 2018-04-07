@@ -47,21 +47,10 @@
             })
         })
         .factory('weatherFactory', ($resource) => {
-            return $resource('/weather/:place', {}, {
-                get: {
-                    method: 'GET',
-                    isArray: false,
-                    params: '@place'
-                }
-            })
+            return $resource('/weather/:place')
         })
         .factory('flickrPhotosProvider', ($resource) => {
-            return $resource('/photos', {}, {
-                get: {
-                    method: 'GET',
-                    isArray: false
-                }
-            })
+            return $resource('/photos')
         })
         .controller('main', ['$scope', function ($scope) {
             
@@ -79,11 +68,13 @@
             $scope.clear = function () {
                 $scope.setLoc = '';
             }
-            $scope.getWeather = () => {
-                $scope.weather = $scope.service.get({place: `${$scope.setLoc}`});
-            }
 
-            $scope.temp = $scope.weather.main.temp - 273.15;
+            $scope.getWeather = () => {
+                let weather = $scope.service.get({place: `${$scope.setLoc}`}, () => {
+                    $scope.weather = weather;
+                    $scope.temp = Math.floor(weather.main.temp - 273.15);
+                });
+            }
 
 
         }])
@@ -109,61 +100,70 @@
         }])
         .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
             $scope.service = flickrPhotosProvider;
-            $scope.rawData = $scope.service.get();
+            $scope.photosUrls = [];
+            let rawData = $scope.service.get({}, () => {
+                 angular.forEach(rawData.photos.photo, (photo) => {
+                     $scope.photosUrls.push(
+                         {
+                             id: photo.id,
+                             url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`,
+                             title: photo.title
+                         }
 
-            // $scope.photoDat = $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
-            //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
-            // });
+                     )
+                 })
+            })
+
         }])
 
-        // .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){
-        //     $scope.factory = barcodeQuery;
-        //     if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
-        //         // safely access `navigator.mediaDevices.getUserMedia`
-        //         console.log('browser be cool')
-        //         let scanner = {
-        //
-        //             init: function () {
-        //                 Quagga.init(this.state, function (err) {
-        //                     if (err) {
-        //                         console.log('You got an error: ', err);
-        //                         return;
-        //                     }
-        //                     console.log("Initialization finished. Ready to start");
-        //                     Quagga.start();
-        //                 }),
-        //                 Quagga.onDetected((data) => {
-        //                     console.log(data)
-        //                     $scope.factory.get({code: data.codeResult.code})
-        //                 })
-        //             },
-        //             state: {
-        //                 inputStream: {
-        //                     name: "Live",
-        //                     type: "LiveStream",
-        //                     constraints: {
-        //                         width: {min: 640},
-        //                         height: {min: 480},
-        //                         facingMode: "environment",
-        //                         aspectRatio: {min: 1, max: 2}
-        //                     },
-        //                     target: document.querySelector('#quaggaTarget')    // Or '#yourElement' (optional)
-        //                 },
-        //                 decoder: {
-        //                     readers: [{
-        //                         format: "ean_reader",
-        //                         config: {
-        //                             supplements: [
-        //                                 'ean_5_reader', 'ean_2_reader'
-        //                             ]
-        //                         }
-        //                     }]
-        //                 }
-        //             }
-        //
-        //         };
-        //         scanner.init()
-        //     }
-        //
-        // }])
+        .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){
+            $scope.factory = barcodeQuery;
+            if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
+                // safely access `navigator.mediaDevices.getUserMedia`
+                console.log('browser be cool')
+                let scanner = {
+
+                    init: function () {
+                        Quagga.init(this.state, function (err) {
+                            if (err) {
+                                console.log('You got an error: ', err);
+                                return;
+                            }
+                            console.log("Initialization finished. Ready to start");
+                            Quagga.start();
+                        }),
+                        Quagga.onDetected((data) => {
+                            console.log(data)
+                            $scope.factory.get({code: data.codeResult.code})
+                        })
+                    },
+                    state: {
+                        inputStream: {
+                            name: "Live",
+                            type: "LiveStream",
+                            constraints: {
+                                width: {min: 640},
+                                height: {min: 480},
+                                facingMode: "environment",
+                                aspectRatio: {min: 1, max: 2}
+                            },
+                            target: document.querySelector('#quaggaTarget')    // Or '#yourElement' (optional)
+                        },
+                        decoder: {
+                            readers: [{
+                                format: "ean_reader",
+                                config: {
+                                    supplements: [
+                                        'ean_5_reader', 'ean_2_reader'
+                                    ]
+                                }
+                            }]
+                        }
+                    }
+
+                };
+                scanner.init()
+            }
+
+        }])
 })();

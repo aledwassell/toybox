@@ -1,6 +1,6 @@
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center;">
-    <div ng-repeat="pic in rawData.photos.photo">
-        <p>{{pic.title}}</p>
-        <img src="https://farm{{pic.farm}}.staticflickr.com/{{pic.server}}/{{pic.id}}_{{pic.secret}}_b.jpg" alt="">
+    <div ng-repeat="pic in photosUrls">
+        <img id="picture{{pic.id}}" src="{{pic.url}}" alt="{{pic.title}}">
+        <label for="picture{{pic.id}}">{{pic.title}}</label>
     </div>
 </div>
