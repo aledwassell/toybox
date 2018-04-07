@@ -53,7 +53,7 @@
             return $resource('/photos')
         })
         .controller('main', ['$scope', function ($scope) {
-            
+
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
