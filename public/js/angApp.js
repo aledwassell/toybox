@@ -83,6 +83,8 @@
                 $scope.weather = $scope.service.get({place: `${$scope.setLoc}`});
             }
 
+            $scope.temp = $scope.weather.main.temp - 273.15;
+
 
         }])
         .controller('dataController', ['$scope', 'data', function($scope, data){
@@ -106,7 +108,9 @@
 
         }])
         .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
-            $scope.rawPhotoData = flickrPhotosProvider.get()
+            $scope.service = flickrPhotosProvider;
+            $scope.rawData = $scope.service.get();
+
             // $scope.photoDat = $scope.rawData.photos.photo.map((cur, index, array, thisArg) => {
             //     cur.url = `https://farm${cur.farm}.staticflickr.com/${cur.server}/${cur.id}_${cur.secret}.jpg`
             // });
