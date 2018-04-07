@@ -7,7 +7,7 @@ const Flickr = require('flickrapi'),
     flickrOptions = {
         api_key: apiKey.apiKey,
         secret: apiKey.secret,
-        user_id: '11644213@N04'
+        user_id: '157408260@N04'
     };
 
 
@@ -17,7 +17,7 @@ module.exports = (app) => {
             flickr.photos.search({
                 user_id: flickr.options.user_id,
                 page: 1,
-                per_page: 5
+                per_page: 20
             }, function(err, result) {
                 if(err){
                     res.send(`There was an error ${err}`)

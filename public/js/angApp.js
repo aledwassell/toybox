@@ -1,19 +1,19 @@
 (function () {
     'use strict';
     var toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute', 'rzModule', 'chart.js', 'angularjs-gauge'])
-        .config(function($routeProvider) {
+        .config(function ($routeProvider) {
             $routeProvider
                 .when('/', {
                     controller: "main",
-                    templateUrl : "views/main.htm"
+                    templateUrl: "views/main.htm"
                 })
                 .when("/weather", {
                     controller: "weatherController",
-                    templateUrl : "views/weather.htm"
+                    templateUrl: "views/weather.htm"
                 })
                 .when("/photos", {
                     controller: "photos",
-                    templateUrl : "views/photos.htm"
+                    templateUrl: "views/photos.htm"
                 })
         })
         .factory('data', function ($resource) {
@@ -57,9 +57,9 @@
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url:'/', name: 'Home'},
-                {url:'#!/weather', name: 'Weather'},
-                {url:'#!/photos', name: 'Photos'}
+                {url: '/', name: 'Home'},
+                {url: '#!/weather', name: 'Weather'},
+                {url: '#!/photos', name: 'Photos'}
             ]
         }])
         .controller('weatherController', ['$scope', 'weatherFactory', function ($scope, weatherFactory) {
@@ -78,7 +78,7 @@
 
 
         }])
-        .controller('dataController', ['$scope', 'data', function($scope, data){
+        .controller('dataController', ['$scope', 'data', function ($scope, data) {
             $scope.dataService = data;
             $scope.sendModel = {};
             $scope.deleteModel = {};
@@ -102,21 +102,22 @@
             $scope.service = flickrPhotosProvider;
             $scope.photosUrls = [];
             let rawData = $scope.service.get({}, () => {
-                 angular.forEach(rawData.photos.photo, (photo) => {
-                     $scope.photosUrls.push(
-                         {
-                             id: photo.id,
-                             url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`,
-                             title: photo.title
-                         }
-
-                     )
-                 })
+                $scope.$watchCollection('rawData.photos.photo', () => {
+                    console.log(rawData.photos.photo);
+                });
+                angular.forEach(rawData.photos.photo, (photo) => {
+                    $scope.photosUrls.push(
+                        {
+                            id: photo.id,
+                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`,
+                            title: photo.title
+                        }
+                    )
+                });
             })
-
         }])
 
-        .controller('scannerController', ['$scope', 'barcodeQuery', function($scope, barcodeQuery){
+        .controller('scannerController', ['$scope', 'barcodeQuery', function ($scope, barcodeQuery) {
             $scope.factory = barcodeQuery;
             if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
                 // safely access `navigator.mediaDevices.getUserMedia`
@@ -132,10 +133,10 @@
                             console.log("Initialization finished. Ready to start");
                             Quagga.start();
                         }),
-                        Quagga.onDetected((data) => {
-                            console.log(data)
-                            $scope.factory.get({code: data.codeResult.code})
-                        })
+                            Quagga.onDetected((data) => {
+                                console.log(data)
+                                $scope.factory.get({code: data.codeResult.code})
+                            })
                     },
                     state: {
                         inputStream: {
