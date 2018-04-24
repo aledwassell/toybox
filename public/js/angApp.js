@@ -16,6 +16,7 @@
                     templateUrl: "views/photos.htm"
                 })
         })
+
         .factory('data', function ($resource) {
             return $resource('/notes', {}, {
                 post: {
